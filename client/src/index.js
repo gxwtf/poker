@@ -12,7 +12,6 @@ const cookieBannerRoot = document.getElementById('cookie-banner');
 const loadingScreen = document.getElementById('loading-screen');
 
 if (
-  process &&
   process.env.NODE_ENV === 'production' &&
   process.env.REACT_APP_MAINTENANCE_MODE === 'true'
 ) {

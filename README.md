@@ -1,10 +1,10 @@
-# Vintage Poker
+# Guangfang Poker
 
-Vintage Poker is a full-stack poker platform built with the MERN-stack, where a user can create an account and play poker on a predetermined set of tables (differ in amount of blinds & buy-ins). The player starts with a specific amount of virtual currency he can play with.
+Guangfang Poker (Powered by Vintage Poker) is a full-stack poker platform built with the MERN-stack, where a user can create an account and play poker on a predetermined set of tables (differ in amount of blinds & buy-ins). The player starts with a specific amount of virtual currency he can play with.
 
 The server part of the application is a Node- / Express-Backend. The Frontend is a React application. Non Real-Time communication between front- & backend is handled via a REST-API. In-game logic-related communications & chat is handled via web sockets / Socket.io.
 
-You can find the live version of this project [here](https://www.vintagepoker.net/).
+You can find the live version of this project [here](https://poker.gxwtf.cn/).
 
 ## Technologies Used
 
@@ -22,12 +22,12 @@ You can find the live version of this project [here](https://www.vintagepoker.ne
 ### Backend:
 
 - **Node.js** & **Express.js**
-- **mongoDb** is used as the database & **mongoose** as ORM
+- **PostgreSQL** is used as the database & **Prisma v6** as ORM
 - Authentication is implemented with **JSON Web Tokens**
   - Passwords are encrypted with **bcrypt**
 - The client-server communication for the game-logic is implemented with **Socket.io**
 - Uses **nodemailer** to send out transactional mails via Mailjet SMTP
-- Security-packages included to make the application more robust are: **helmet**, **hpp**, **express-rate-limit** & **express-mongo-sanitize**
+- Security-packages included to make the application more robust are: **helmet** & **hpp**
 
 ## Features
 
@@ -50,14 +50,13 @@ The more detailed project documentation can be found [here](https://www.notion.s
 
 ## Quick Start
 
-### Set-up MongoDB
+### Set-up PostgreSQL
 
-Set-up either a local mongoDB instance or create a [cloud-hosted instance](https://www.mongodb.com/). Save your db username + passsword and the mongoDb connection-string as you will need it for the next step.
+Set-up either a local PostgreSQL instance or create a [cloud-hosted instance](https://www.prisma.io/). Save your db username + passsword and the PostgreSQL connection-string as you will need it for the next step.
 
 ### Add a "local.env" file in the "/server/config" folder with the following entries
 
 ```
-  MONGO_URI=<YOUR_MONGODB_URI>
   JWT_SECRET=<YOUR_JWT_SECRET>
   PORT=<YOUR_SERVER_PORT>
   NODE_ENV=development
@@ -65,6 +64,12 @@ Set-up either a local mongoDB instance or create a [cloud-hosted instance](https
   SMTP_PORT=<YOUR_SMTP_PORT>
   SMTP_USER=<YOUR_SMTP_USER>
   SMTP_PW=<YOUR_SMTP_PASSWORD>
+```
+
+### Add a ".env" file in the root folder of the project with the following entries
+
+```
+  DATABASE_URL=postgresql://<YOUR_DB_USER>:<YOUR_DB_PASSWORD>@<YOUR_DB_HOST>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?schema=public
 ```
 
 ### Set-up Contentful
@@ -93,6 +98,13 @@ npm install
 ```bash
 cd client
 npm install
+```
+
+### Init PostgreSQL
+
+```bash
+npx prisma generate
+npx prisma migrate dev --name init
 ```
 
 ### Run both Express & React from root project-directory

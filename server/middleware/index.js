@@ -25,12 +25,12 @@ const configureMiddleware = (app) => {
   app.use(xssClean());
 
   // Add rate limit to API (100 requests per 10 mins)
-  app.use(
-    expressRateLimit({
-      windowMs: 10 * 60 * 1000,
-      max: 100,
-    }),
-  );
+  // app.use(
+  //   expressRateLimit({
+  //     windowMs: 10 * 60 * 1000,
+  //     max: 100,
+  //   }),
+  // );
 
   // Prevent http param pollution
   app.use(hpp());

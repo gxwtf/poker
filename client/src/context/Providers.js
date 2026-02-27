@@ -2,7 +2,6 @@ import React from 'react';
 import GlobalState from './global/GlobalState';
 import AuthProvider from './auth/AuthProvider';
 import LocaProvider from './localization/LocaProvider';
-import ContentProvider from './content/ContentProvider';
 import ModalProvider from './modal/ModalProvider';
 import { ThemeProvider } from 'styled-components';
 import theme from '../styles/theme';
@@ -18,21 +17,19 @@ const Providers = ({ children }) => (
     <ThemeProvider theme={theme}>
       <GlobalState>
         <LocaProvider>
-          <ContentProvider>
-            <AuthProvider>
-              <ModalProvider>
-                <OfflineProvider>
-                  <WebSocketProvider>
-                    <GameState>
-                      <Normalize />
-                      <GlobalStyles />
-                      {children}
-                    </GameState>
-                  </WebSocketProvider>
-                </OfflineProvider>
-              </ModalProvider>
-            </AuthProvider>
-          </ContentProvider>
+          <AuthProvider>
+            <ModalProvider>
+              <OfflineProvider>
+                <WebSocketProvider>
+                  <GameState>
+                    <Normalize />
+                    <GlobalStyles />
+                    {children}
+                  </GameState>
+                </WebSocketProvider>
+              </OfflineProvider>
+            </ModalProvider>
+          </AuthProvider>
         </LocaProvider>
       </GlobalState>
     </ThemeProvider>

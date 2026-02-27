@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import contentContext from '../../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -74,19 +74,19 @@ const ButtonWrapper = styled.div`
 `;
 
 const CookieBanner = ({ clickHandler, className }) => {
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
 
   return ReactDOM.createPortal(
     <Wrapper className={className}>
       <StyledCookieBanner>
         <ContentWrapper>
-          <Content>{getLocalizedString('cookiebanner-text')}</Content>
+          <Content>{t('cookiebanner-text')}</Content>
           <ButtonWrapper>
             <Button small primary onClick={clickHandler}>
-              {getLocalizedString('cookiebanner-confirm_btn_txt')}
+              {t('cookiebanner-confirm_btn_txt')}
             </Button>
             <Button as={Link} to="/privacy" secondary small>
-              {getLocalizedString('cookiebanner-info_btn_txt')}
+              {t('cookiebanner-info_btn_txt')}
             </Button>
           </ButtonWrapper>
         </ContentWrapper>

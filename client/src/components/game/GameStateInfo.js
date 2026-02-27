@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import contentContext from '../../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 import ChipsAmountPill from './ChipsAmountPill';
 import { InfoPill } from './InfoPill';
 
@@ -15,12 +15,12 @@ const Wrapper = styled.div`
 `;
 
 export const GameStateInfo = ({ currentTable }) => {
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
 
   return (
     <Wrapper>
       {currentTable.players.length <= 1 || currentTable.handOver ? (
-        <InfoPill>{getLocalizedString('game_state-info_wait')}</InfoPill>
+        <InfoPill>{t('game_state-info_wait')}</InfoPill>
       ) : (
         <InfoPill>
           {currentTable.board.length === 0 && 'Pre-Flop'}

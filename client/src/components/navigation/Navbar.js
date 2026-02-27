@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import LogoWithText from '../logo/LogoWithText';
 import Logo from '../logo/LogoIcon';
 import Container from '../layout/Container';
@@ -10,7 +10,7 @@ import ChipsAmount from '../user/ChipsAmount';
 import HamburgerButton from '../buttons/HamburgerButton';
 import Spacer from '../layout/Spacer';
 import Text from '../typography/Text';
-import contentContext from '../../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 import Markdown from 'react-remarkable';
 
 const StyledNav = styled.nav`
@@ -29,19 +29,19 @@ const Navbar = ({
   openNavMenu,
   className,
 }) => {
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
 
   const openShopModal = () =>
     openModal(
       () => (
         <Markdown>
           <Text textAlign="center">
-            {getLocalizedString('shop-coming_soon-modal_text')}
+            {t('shop-coming_soon-modal_text')}
           </Text>
         </Markdown>
       ),
-      getLocalizedString('shop-coming_soon-modal_heading'),
-      getLocalizedString('shop-coming_soon-modal_btn_text'),
+      t('shop-coming_soon-modal_heading'),
+      t('shop-coming_soon-modal_btn_text'),
     );
 
   if (!loggedIn)
@@ -56,12 +56,12 @@ const Navbar = ({
             <Spacer>
               {location.pathname !== '/register' && (
                 <Button as={Link} to="/register" primary small>
-                  {getLocalizedString('navbar-register_btn')}
+                  {t('navbar-register_btn')}
                 </Button>
               )}
               {location.pathname !== '/login' && (
                 <Button as={Link} to="/login" secondary small>
-                  {getLocalizedString('navbar-login_btn')}
+                  {t('navbar-login_btn')}
                 </Button>
               )}
             </Spacer>
@@ -88,7 +88,7 @@ const Navbar = ({
             />
             <Hider hideOnMobile>
               <Button to="/" primary small onClick={openShopModal}>
-                {getLocalizedString('navbar-buychips_btn')}
+                {t('navbar-buychips_btn')}
               </Button>
             </Hider>
             <HamburgerButton clickHandler={openNavMenu} />

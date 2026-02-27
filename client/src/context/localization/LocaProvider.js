@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import LocaContext from './locaContext';
 import { withRouter } from 'react-router-dom';
+import i18n from '../../i18n';
 
 const initialState = localStorage.getItem('lang') || 'en';
 
@@ -16,6 +17,7 @@ const LocaProvider = ({ location, children }) => {
   useEffect(() => {
     localStorage.setItem('lang', lang);
     document.documentElement.setAttribute('lang', lang);
+    i18n.changeLanguage(lang);
     // eslint-disable-next-line
   }, [lang]);
 

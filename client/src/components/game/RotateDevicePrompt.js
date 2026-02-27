@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Text from '../typography/Text';
 import rotateGif from '../../assets/game/rotate.gif';
 import styled from 'styled-components';
-import contentContext from '../../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
   display: none;
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
 `;
 
 export const RotateDevicePrompt = () => {
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <img
@@ -38,7 +38,7 @@ export const RotateDevicePrompt = () => {
       />
       <br />
       <Text textAlign="center">
-        {getLocalizedString('game_rotate-device-prompt')}
+        {t('game_rotate-device-prompt')}
       </Text>
     </Wrapper>
   );

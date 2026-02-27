@@ -16,7 +16,7 @@ import { InfoPill } from '../components/game/InfoPill';
 import { GameUI } from '../components/game/GameUI';
 import { GameStateInfo } from '../components/game/GameStateInfo';
 import PokerCard from '../components/game/PokerCard';
-import contentContext from '../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 
 const Play = ({ history }) => {
   const { socket } = useContext(socketContext);
@@ -35,7 +35,7 @@ const Play = ({ history }) => {
     call,
     raise,
   } = useContext(gameContext);
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
 
   const [bet, setBet] = useState(0);
 
@@ -43,10 +43,10 @@ const Play = ({ history }) => {
     !socket &&
       openModal(
         () => (
-          <Text>{getLocalizedString('game_lost-connection-modal_text')}</Text>
+          <Text>{t('game_lost-connection-modal_text')}</Text>
         ),
-        getLocalizedString('game_lost-connection-modal_header'),
-        getLocalizedString('game_lost-connection-modal_btn-txt'),
+        t('game_lost-connection-modal_header'),
+        t('game_lost-connection-modal_btn-txt'),
         () => history.push('/'),
       );
     socket && joinTable(1);
@@ -76,7 +76,7 @@ const Play = ({ history }) => {
               style={{ zIndex: '50' }}
             >
               <Button small secondary onClick={leaveTable}>
-                {getLocalizedString('game_leave-table-btn')}
+                {t('game_leave-table-btn')}
               </Button>
             </PositionedUISlot>
             {!isPlayerSeated && (
@@ -91,14 +91,14 @@ const Play = ({ history }) => {
                   <Text textAlign="right">
                     <strong>{currentTable.name}</strong> |{' '}
                     <strong>
-                      {getLocalizedString('game_info_limit-lbl')}:{' '}
+                      {t('game_info_limit-lbl')}:{' '}
                     </strong>
                     {new Intl.NumberFormat(
                       document.documentElement.lang,
                     ).format(currentTable.limit)}{' '}
                     |{' '}
                     <strong>
-                      {getLocalizedString('game_info_blinds-lbl')}:{' '}
+                      {t('game_info_blinds-lbl')}:{' '}
                     </strong>
                     {new Intl.NumberFormat(
                       document.documentElement.lang,

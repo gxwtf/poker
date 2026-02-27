@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Text from '../typography/Text';
 import ColoredText from '../typography/ColoredText';
-import contentContext from '../../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
+import locaContext from '../../context/localization/locaContext';
 
 const StyledFooter = styled.footer`
   text-align: center;
@@ -13,12 +14,13 @@ const StyledFooter = styled.footer`
 `;
 
 const Footer = ({ className, setLang, staticPages }) => {
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
+  const { lang } = useContext(locaContext);
 
   return (
     <StyledFooter className={className}>
       <Text textAlign="center" fontSize="0.9rem">
-        {getLocalizedString('footer-lang_selection_txt')}:{'  '}
+        {t('footer-lang_selection_txt')}:{'  '}
         <a
           href="!"
           onClick={(e) => {
@@ -37,6 +39,16 @@ const Footer = ({ className, setLang, staticPages }) => {
           }}
         >
           DE
+        </a>{' '}
+        |{' '}
+        <a
+          href="!"
+          onClick={(e) => {
+            e.preventDefault();
+            setLang('zh');
+          }}
+        >
+          中文
         </a>
       </Text>
       <Text textAlign="center" fontSize="0.9rem">
@@ -44,7 +56,7 @@ const Footer = ({ className, setLang, staticPages }) => {
           staticPages.map((page, index, array) => {
             const component = (
               <Link key={page.slug} to={`/${page.slug}`}>
-                {page.title}
+                {typeof page.title === 'object' ? page.title[lang] || page.title.en : page.title}
               </Link>
             );
             if (index < array.length - 1)
@@ -58,7 +70,7 @@ const Footer = ({ className, setLang, staticPages }) => {
           })}
       </Text>
       <Text textAlign="center" fontSize="0.9rem">
-        <ColoredText>{getLocalizedString('footer-copyright_txt')}</ColoredText>
+        <ColoredText>{t('footer-copyright_txt')}</ColoredText>
       </Text>
     </StyledFooter>
   );

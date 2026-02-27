@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Container from '../components/layout/Container';
 import CenteredBlock from '../components/layout/CenteredBlock';
 import Heading from '../components/typography/Heading';
@@ -9,7 +9,7 @@ import illustrationMobile from '../assets/img/main-illustration-mobile@2x.png';
 import illustrationDesktop from '../assets/img/main-illustration-desktop@2x.png';
 import styled from 'styled-components';
 import useScrollToTopOnPageLoad from '../hooks/useScrollToTopOnPageLoad';
-import contentContext from '../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 import Markdown from 'react-remarkable';
 
 const MarketingHeadline = styled(Heading)`
@@ -19,7 +19,7 @@ const MarketingHeadline = styled(Heading)`
 `;
 
 const Landing = () => {
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
   useScrollToTopOnPageLoad();
 
   return (
@@ -34,7 +34,7 @@ const Landing = () => {
             headingClass="h1"
             textCenteredOnMobile
             dangerouslySetInnerHTML={{
-              __html: getLocalizedString('landing-primary_headline'),
+              __html: t('landing-primary_headline'),
             }}
           />
         </Markdown>
@@ -45,7 +45,7 @@ const Landing = () => {
             headingClass="h6"
             textCenteredOnMobile
             dangerouslySetInnerHTML={{
-              __html: getLocalizedString('landing-secondary_headline'),
+              __html: t('landing-secondary_headline'),
             }}
           />
         </Markdown>
@@ -58,10 +58,10 @@ const Landing = () => {
             fullWidthOnMobile
             autoFocus
           >
-            {getLocalizedString('navbar-register_btn')}
+            {t('navbar-register_btn')}
           </Button>
           <Button as={Link} to="/login" large secondary fullWidthOnMobile>
-            {getLocalizedString('navbar-login_btn')}
+            {t('navbar-login_btn')}
           </Button>
         </Wrapper>
       </CenteredBlockWithAnimation>

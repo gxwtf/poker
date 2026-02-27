@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import { Form } from '../components/forms/Form';
 import RelativeWrapper from '../components/layout/RelativeWrapper';
 import globalContext from '../context/global/globalContext';
-import contentContext from '../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
   display: grid;
@@ -50,7 +50,7 @@ const Wrapper = styled.div`
 // `;
 
 const Dashboard = () => {
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
   const { userName, email } = useContext(globalContext);
 
   return (
@@ -70,25 +70,25 @@ const Dashboard = () => {
           </HeadingWithLogo>
           <Wrapper>
             <FormGroup>
-              <Label>{getLocalizedString('dashboard-nickname_lbl_txt')}</Label>
+              <Label>{t('dashboard-nickname_lbl_txt')}</Label>
               <Input value={userName} />
               <Button primary>
-                {getLocalizedString('dashboard-nickname_btn_txt')}
+                {t('dashboard-nickname_btn_txt')}
               </Button>
             </FormGroup>
             <FormGroup>
-              <Label>{getLocalizedString('dashboard-email_lbl_txt')}</Label>
+              <Label>{t('dashboard-email_lbl_txt')}</Label>
               <Input type="email" value={email} />
               <Button primary>
-                {getLocalizedString('dashboard-email_btn_txt')}
+                {t('dashboard-email_btn_txt')}
               </Button>
             </FormGroup>
             <FormGroup style={{ gridColumnStart: '1', gridColumnEnd: '3' }}>
               <Button primary>
-                {getLocalizedString('dashboard-reset_pw_btn_text')}
+                {t('dashboard-reset_pw_btn_text')}
               </Button>
               <Button>
-                {getLocalizedString('dashboard-delete_acct_btn_text')}
+                {t('dashboard-delete_acct_btn_text')}
               </Button>
             </FormGroup>
             <Button
@@ -97,7 +97,7 @@ const Dashboard = () => {
               secondary
               style={{ gridColumnStart: '1', gridColumnEnd: '3' }}
             >
-              {getLocalizedString('static_page-back_btn_txt')}
+              {t('static_page-back_btn_txt')}
             </Button>
           </Wrapper>
         </Form>

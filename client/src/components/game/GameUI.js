@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import contentContext from '../../context/content/contentContext';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '../buttons/Button';
 import { BetSlider } from './BetSlider';
 import { UIWrapper } from './UIWrapper';
@@ -15,7 +15,7 @@ export const GameUI = ({
   check,
   call,
 }) => {
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
 
   return (
     <UIWrapper>
@@ -26,13 +26,13 @@ export const GameUI = ({
         setBet={setBet}
       />
       <Button small onClick={() => raise(bet + currentTable.seats[seatId].bet)}>
-        {getLocalizedString('game_ui_bet')} {bet}
+        {t('game_ui_bet')} {bet}
       </Button>
       <Button small secondary onClick={standUp}>
-        {getLocalizedString('game_ui_stand-up')}
+        {t('game_ui_stand-up')}
       </Button>
       <Button small secondary onClick={fold}>
-        {getLocalizedString('game_ui_fold')}
+        {t('game_ui_fold')}
       </Button>
       <Button
         small
@@ -43,7 +43,7 @@ export const GameUI = ({
         }
         onClick={check}
       >
-        {getLocalizedString('game_ui_check')}
+        {t('game_ui_check')}
       </Button>
       <Button
         small
@@ -53,7 +53,7 @@ export const GameUI = ({
         }
         onClick={call}
       >
-        {getLocalizedString('game_ui_call')}{' '}
+        {t('game_ui_call')}{' '}
         {currentTable.callAmount &&
         currentTable.seats[seatId].bet < currentTable.callAmount &&
         currentTable.callAmount <= currentTable.seats[seatId].stack
@@ -68,7 +68,7 @@ export const GameUI = ({
           )
         }
       >
-        {getLocalizedString('game_ui_all-in')} (
+        {t('game_ui_all-in')} (
         {currentTable.seats[seatId].stack})
       </Button>
     </UIWrapper>

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import lobbyIcon from '../../assets/icons/lobby-icon.svg';
 import newsIcon from '../../assets/icons/news-icon.svg';
 import userIcon from '../../assets/icons/user-icon.svg';
-import contentContext from '../../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 import Markdown from 'react-remarkable';
 import socketContext from '../../context/websocket/socketContext';
 import globalContext from '../../context/global/globalContext';
@@ -126,7 +126,7 @@ const NavMenu = ({
   // setLang,
 }) => {
   const { players } = useContext(globalContext);
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
   const { cleanUp } = useContext(socketContext);
 
   const openShopModal = () =>
@@ -134,12 +134,12 @@ const NavMenu = ({
       () => (
         <Markdown>
           <Text textAlign="center">
-            {getLocalizedString('shop-coming_soon-modal_text')}
+            {t('shop-coming_soon-modal_text')}
           </Text>
         </Markdown>
       ),
-      getLocalizedString('shop-coming_soon-modal_heading'),
-      getLocalizedString('shop-coming_soon-modal_btn_text'),
+      t('shop-coming_soon-modal_heading'),
+      t('shop-coming_soon-modal_btn_text'),
     );
 
   return (
@@ -157,7 +157,7 @@ const NavMenu = ({
         </IconWrapper>
         <MenuHeader>
           <SalutationText textAlign="left">
-            {getLocalizedString('main_page-salutation')}
+            {t('main_page-salutation')}
             <br />
             <ColoredText>{userName}!</ColoredText>
           </SalutationText>
@@ -172,7 +172,7 @@ const NavMenu = ({
               clickHandler={openShopModal}
             />
             <Button onClick={openShopModal} small primary>
-              {getLocalizedString('shop-coming_soon-modal_heading')}
+              {t('shop-coming_soon-modal_heading')}
             </Button>
           </HorizontalWrapper>
           {/* <HorizontalWrapper>
@@ -190,7 +190,7 @@ const NavMenu = ({
               onClose();
             }}
           >
-            {getLocalizedString('navmenu-menu_item-lobby_txt')}
+            {t('navmenu-menu_item-lobby_txt')}
             <img
               src={lobbyIcon}
               alt="Lobby"
@@ -205,7 +205,7 @@ const NavMenu = ({
               onClose();
             }}
           >
-            {getLocalizedString('navmenu-menu_item-dashboard_txt')}
+            {t('navmenu-menu_item-dashboard_txt')}
             <img
               src={userIcon}
               alt="Dashboard"
@@ -220,7 +220,7 @@ const NavMenu = ({
               onClose();
             }}
           >
-            {getLocalizedString('navmenu-menu_item-news_txt')}
+            {t('navmenu-menu_item-news_txt')}
             <img
               src={newsIcon}
               alt="News"
@@ -240,7 +240,7 @@ const NavMenu = ({
             fullWidth
             small
           >
-            {getLocalizedString('navmenu-logout_btn')}
+            {t('navmenu-logout_btn')}
           </Button>
         </MenuFooter>
       </StyledNavMenu>

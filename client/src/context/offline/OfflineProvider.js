@@ -3,21 +3,21 @@ import OfflineContext from './offlineContext';
 import useServiceWorker from '../../hooks/useServiceWorker';
 import modalContext from '../modal/modalContext';
 import Text from '../../components/typography/Text';
-import contentContext from '../content/contentContext';
+import { useTranslation } from 'react-i18next';
 
 const OfflineProvider = ({ children }) => {
   const { openModal } = useContext(modalContext);
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
 
   const [updateServiceWorker] = useServiceWorker(() => onUpdateServiceWorker());
 
   const onUpdateServiceWorker = () => {
     openModal(
       () => (
-        <Text>{getLocalizedString('service_worker-update_available')}</Text>
+        <Text>{t('service_worker-update_available')}</Text>
       ),
-      getLocalizedString('service_worker-update_headline'),
-      getLocalizedString('service_worker-update_confirm_btn_txt'),
+      t('service_worker-update_headline'),
+      t('service_worker-update_confirm_btn_txt'),
       updateServiceWorker,
     );
   };

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from '../../pages/HomePage';
 import RegistrationPage from '../../pages/RegistrationPage';
@@ -8,10 +8,9 @@ import Play from '../../pages/Play';
 import ProtectedRoute from './ProtectedRoute';
 import StaticPage from '../../pages/StaticPage';
 import NotFoundPage from '../../pages/NotFoundPage';
-import contentContext from '../../context/content/contentContext';
+import staticPages from '../../data/staticPages';
 
 const Routes = () => {
-  const { staticPages } = useContext(contentContext);
 
   return (
     <Switch>

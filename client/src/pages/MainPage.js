@@ -12,7 +12,7 @@ import Text from '../components/typography/Text';
 import { withRouter } from 'react-router-dom';
 import useScrollToTopOnPageLoad from '../hooks/useScrollToTopOnPageLoad';
 import globalContext from '../context/global/globalContext';
-import contentContext from '../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 import modalContext from '../context/modal/modalContext';
 
 const WelcomeHeading = styled(Heading)`
@@ -115,7 +115,7 @@ const MainMenuCard = styled.div`
 
 const MainPage = ({ history }) => {
   const { userName } = useContext(globalContext);
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
   const { openModal } = useContext(modalContext);
 
   useScrollToTopOnPageLoad();
@@ -129,20 +129,20 @@ const MainPage = ({ history }) => {
       padding="6rem 2rem 2rem 2rem"
     >
       <WelcomeHeading as="h2" textCentered>
-        {getLocalizedString('main_page-salutation')}{' '}
+        {t('main_page-salutation')}{' '}
         <ColoredText>{userName}!</ColoredText>
       </WelcomeHeading>
       <MainMenuWrapper>
         <MainMenuCard onClick={() => history.push('/play')}>
           <img src={kingImg} alt="Join Table" />
           <Heading as="h3" headingClass="h5" textCentered>
-            {getLocalizedString('main_page-join_table').toUpperCase()}
+            {t('main_page-join_table').toUpperCase()}
           </Heading>
         </MainMenuCard>
         <MainMenuCard onClick={() => history.push('/play')}>
           <img src={queen2Img} alt="Quick Game" />
           <Heading as="h3" headingClass="h5" textCentered>
-            {getLocalizedString('main_page-quick_game').toUpperCase()}
+            {t('main_page-quick_game').toUpperCase()}
           </Heading>
         </MainMenuCard>
         <MainMenuCard
@@ -150,23 +150,23 @@ const MainPage = ({ history }) => {
             openModal(
               () => (
                 <Text textAlign="center">
-                  {getLocalizedString('main_page-modal_text')}
+                  {t('main_page-modal_text')}
                 </Text>
               ),
-              getLocalizedString('main_page-modal_heading'),
-              getLocalizedString('main_page-modal_button_text'),
+              t('main_page-modal_heading'),
+              t('main_page-modal_button_text'),
             );
           }}
         >
           <img src={jackImg} alt="Shop" />
           <Heading as="h3" headingClass="h5" textCentered>
-            {getLocalizedString('main_page-open_shop').toUpperCase()}
+            {t('main_page-open_shop').toUpperCase()}
           </Heading>
         </MainMenuCard>
         <MainMenuCard onClick={() => history.push('/game-rules')}>
           <img src={queenImg} alt="Rules" />
           <Heading as="h3" headingClass="h5" textCentered>
-            {getLocalizedString('main_page-open_rules').toUpperCase()}
+            {t('main_page-open_rules').toUpperCase()}
           </Heading>
         </MainMenuCard>
       </MainMenuWrapper>

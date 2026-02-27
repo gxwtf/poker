@@ -12,11 +12,11 @@ import RelativeWrapper from '../components/layout/RelativeWrapper';
 import ShowPasswordButton from '../components/buttons/ShowPasswordButton';
 import useScrollToTopOnPageLoad from '../hooks/useScrollToTopOnPageLoad';
 import authContext from '../context/auth/authContext';
-import contentContext from '../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 import { TiledBackgroundImage } from '../components/decoration/TiledBackgroundImage';
 
 const LoginPage = () => {
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
   const { login, isLoggedIn } = useContext(authContext);
 
   useScrollToTopOnPageLoad();
@@ -50,11 +50,11 @@ const LoginPage = () => {
           }}
         >
           <HeadingWithLogo textCentered hideIconOnMobile={false}>
-            {getLocalizedString('login_page-header_txt')}
+            {t('login_page-header_txt')}
           </HeadingWithLogo>
           <FormGroup>
             <Label htmlFor="email">
-              {getLocalizedString('login_page-email_lbl_txt')}
+              {t('login_page-email_lbl_txt')}
             </Label>
             <Input
               type="email"
@@ -66,7 +66,7 @@ const LoginPage = () => {
           </FormGroup>
           <FormGroup>
             <Label htmlFor="password">
-              {getLocalizedString('login_page-password_lbl_txt')}
+              {t('login_page-password_lbl_txt')}
             </Label>
             <ShowPasswordButton passwordRef={passwordRef} />
             <Input
@@ -79,11 +79,11 @@ const LoginPage = () => {
           </FormGroup>
           <ButtonGroup>
             <Button primary type="submit" fullWidth>
-              {getLocalizedString('login_page-cta_btn_txt')}
+              {t('login_page-cta_btn_txt')}
             </Button>
             {/* <Link to="/">I foI do not have an account yet!rgot my password!</Link> */}
             <Link to="/register">
-              {getLocalizedString('login_page-no_account_txt')}
+              {t('login_page-no_account_txt')}
             </Link>
           </ButtonGroup>
         </Form>

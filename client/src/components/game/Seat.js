@@ -17,7 +17,7 @@ import { EmptySeat } from './EmptySeat';
 import { OccupiedSeat } from './OccupiedSeat';
 import { Hand } from './Hand';
 import { NameTag } from './NameTag';
-import contentContext from '../../context/content/contentContext';
+import { useTranslation } from 'react-i18next';
 import Markdown from 'react-remarkable';
 import DealerButton from '../icons/DealerButton';
 import { StyledSeat } from './StyledSeat';
@@ -26,7 +26,7 @@ export const Seat = ({ currentTable, seatNumber, isPlayerSeated, sitDown }) => {
   const { openModal, closeModal } = useContext(modalContext);
   const { chipsAmount } = useContext(globalContext);
   const { standUp, seatId, rebuy } = useContext(gameContext);
-  const { getLocalizedString } = useContext(contentContext);
+  const { t } = useTranslation();
 
   const seat = currentTable.seats[seatNumber];
   const maxBuyin = currentTable.limit;
@@ -74,13 +74,13 @@ export const Seat = ({ currentTable, seatNumber, isPlayerSeated, sitDown }) => {
               </FormGroup>
               <ButtonGroup>
                 <Button primary type="submit" fullWidth>
-                  {getLocalizedString('game_rebuy-modal_confirm')}
+                  {t('game_rebuy-modal_confirm')}
                 </Button>
               </ButtonGroup>
             </Form>
           ),
-          getLocalizedString('game_rebuy-modal_header'),
-          getLocalizedString('game_rebuy-modal_cancel'),
+          t('game_rebuy-modal_header'),
+          t('game_rebuy-modal_cancel'),
           () => {
             standUp();
             closeModal();
@@ -137,21 +137,21 @@ export const Seat = ({ currentTable, seatNumber, isPlayerSeated, sitDown }) => {
                       </FormGroup>
                       <ButtonGroup>
                         <Button primary type="submit" fullWidth>
-                          {getLocalizedString('game_buyin-modal_confirm')}
+                          {t('game_buyin-modal_confirm')}
                         </Button>
                       </ButtonGroup>
                     </Form>
                   ),
-                  getLocalizedString('game_buyin-modal_header'),
-                  getLocalizedString('game_buyin-modal_cancel'),
+                  t('game_buyin-modal_header'),
+                  t('game_buyin-modal_cancel'),
                 );
               }}
             >
-              {getLocalizedString('game_sitdown-btn')}
+              {t('game_sitdown-btn')}
             </Button>
           ) : (
             <EmptySeat>
-              <Markdown>{getLocalizedString('game_table_empty-seat')}</Markdown>
+              <Markdown>{t('game_table_empty-seat')}</Markdown>
             </EmptySeat>
           )}
         </>

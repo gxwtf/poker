@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import logoWithText from './assets/img/logo-text@2x.png';
 import Providers from './context/Providers';
+import './i18n';
 
 const rootElement = document.getElementById('root');
 const cookieBannerRoot = document.getElementById('cookie-banner');

@@ -73,7 +73,7 @@ const Landing = () => {
 };
 
 const CenteredBlockWithAnimation = styled(CenteredBlock)`
-  opacity: 0;
+  opacity: 1;
   -webkit-animation-duration: 0.3s;
   animation-duration: 0.3s;
   -webkit-animation-delay: 0.3s;
@@ -92,7 +92,6 @@ const CenteredBlockWithAnimation = styled(CenteredBlock)`
     to {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
-      opacity: 1;
     }
   }
   @keyframes fadeInLeft {
@@ -104,7 +103,6 @@ const CenteredBlockWithAnimation = styled(CenteredBlock)`
     to {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
-      opacity: 1;
     }
   }
 `;
@@ -126,8 +124,7 @@ const DesktopIllustration = styled.img`
   max-width: 400px;
   -webkit-transform: scale(1.25);
   transform: scale(1.25);
-  transition: all 0.5s;
-  opacity: 0;
+  opacity: 1;
   animation-duration: 0.3s;
   animation-delay: 0.6s;
   animation-fill-mode: both;
@@ -146,7 +143,6 @@ const DesktopIllustration = styled.img`
     to {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
-      opacity: 1;
     }
   }
 
@@ -159,7 +155,6 @@ const DesktopIllustration = styled.img`
     to {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
-      opacity: 1;
     }
   }
 `;

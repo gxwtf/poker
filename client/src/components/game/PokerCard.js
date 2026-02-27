@@ -9,10 +9,9 @@ const StyledPokerCardWrapper = styled.div`
   animation-fill-mode: both;
   -webkit-animation-duration: 0.5s;
   -webkit-animation-fill-mode: both;
-  opacity: 0;
+  opacity: 1;
   animation-name: fadeInUp;
   -webkit-animation-name: fadeInUp;
-  transition: all 0.5s;
 
   @keyframes fadeInUp {
     from {
@@ -23,7 +22,6 @@ const StyledPokerCardWrapper = styled.div`
     to {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
-      opacity: 1;
     }
   }
 
@@ -36,7 +34,6 @@ const StyledPokerCardWrapper = styled.div`
     to {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
-      opacity: 1;
     }
   }
 

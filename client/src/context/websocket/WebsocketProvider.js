@@ -50,8 +50,8 @@ const WebSocketProvider = ({ children }) => {
 
   function connect() {
     const socket = io(config.socketURI, {
-      transports: ['websocket'],
-      upgrade: false,
+      transports: ['polling', 'websocket'],
+      upgrade: true,
     });
     registerCallbacks(socket);
     setSocket(socket);

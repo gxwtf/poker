@@ -1,33 +1,43 @@
-const config = require('../config');
-const mongoose = require('mongoose');
+const { prisma } = require('../config/db');
 
-const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
+const User = {
+  findById: async (id, options = {}) => {
+    const { select } = options;
+    let selectObj = {};
+    let useSelect = false;
+    
+    if (select) {
+      selectObj = select.split(' ').reduce((acc, field) => {
+        if (field !== '-password') {
+          acc[field] = true;
+        }
+        return acc;
+      }, {});
+      useSelect = Object.keys(selectObj).length > 0;
+    }
+    
+    const user = await prisma.user.findUnique({
+      where: { id },
+      ...(useSelect && { select: selectObj }),
+    });
+    return user;
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
+  findOne: async (where) => {
+    return await prisma.user.findFirst({ where });
   },
-  password: {
-    type: String,
-    required: true,
+  create: async (data) => {
+    return await prisma.user.create({ data });
   },
-  chipsAmount: {
-    type: Number,
-    default: config.INITIAL_CHIPS_AMOUNT,
+  save: async (user) => {
+    return await prisma.user.update({
+      where: { id: user.id },
+      data: user,
+    });
   },
-  type: {
-    type: Number,
-    default: 0,
+  update: async (where, data) => {
+    return await prisma.user.update({ where, data });
   },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
-});
+};
 
-module.exports = User = mongoose.model('user', UserSchema);
+module.exports = User;
+

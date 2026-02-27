@@ -76,11 +76,11 @@ const init = (socket, io) => {
         });
       }
 
-      user = await User.findById(user.id).select('-password');
+      user = await User.findById(user.id, { select: '-password' });
 
       players[socket.id] = new Player(
         socket.id,
-        user._id,
+        user.id,
         user.name,
         user.chipsAmount,
       );
@@ -258,11 +258,15 @@ const init = (socket, io) => {
 
   async function updatePlayerBankroll(player, amount) {
     const user = await User.findById(player.id);
-    user.chipsAmount += amount;
-    await user.save();
+    await User.update(
+      { id: user.id },
+      { chipsAmount: user.chipsAmount + amount }
+    );
 
-    players[socket.id].bankroll += amount;
-    io.to(socket.id).emit(PLAYERS_UPDATED, getCurrentPlayers());
+    if (players[player.socketId]) {
+      players[player.socketId].bankroll += amount;
+      io.to(player.socketId).emit(PLAYERS_UPDATED, getCurrentPlayers());
+    }
   }
 
   function findSeatBySocketId(socketId) {

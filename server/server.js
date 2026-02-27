@@ -1,13 +1,13 @@
 const path = require('path');
 const express = require('express');
 const config = require('./config');
-const connectDB = require('./config/db');
+const { connectDB, prisma } = require('./config/db');
 const configureMiddleware = require('./middleware');
 const configureRoutes = require('./routes');
 const socketio = require('socket.io');
 const gameSocket = require('./socket/index');
 
-// Connect and get reference to mongodb instance
+// Connect and get reference to database instance
 let db;
 
 (async function () {
@@ -21,6 +21,7 @@ const app = express();
 configureMiddleware(app);
 
 // Set-up static asset path
+app.use(express.static(path.join('client', 'build')));
 app.use(express.static(path.join('server', 'public')));
 
 // Set-up Routes
@@ -40,7 +41,7 @@ io.on('connection', (socket) => gameSocket.init(socket, io));
 
 // Error handling - close server
 process.on('unhandledRejection', (err) => {
-  db.disconnect();
+  prisma.$disconnect();
 
   console.error(`Error: ${err.message}`);
   server.close(() => {

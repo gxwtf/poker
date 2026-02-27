@@ -32,13 +32,10 @@ exports.register = async (req, res) => {
       });
     }
 
-    user = new User({ name, email, password });
-
     const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    user.password = await bcrypt.hash(password, salt);
-
-    await user.save();
+    user = await User.create({ name, email, password: hashedPassword });
 
     try {
       await sendEmail(user.email, WelcomeMail(user.name));

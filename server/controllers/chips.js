@@ -6,12 +6,13 @@ const User = require('../models/User');
 // @access  Private
 exports.handleFreeChipsRequest = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.id, { select: '-password' });
     if (user.chipsAmount <= 0) {
-      user.chipsAmount += INITIAL_CHIPS_AMOUNT;
-      await user.save();
-
-      return res.status(200).json(user);
+      const updatedUser = await User.update(
+        { id: user.id },
+        { chipsAmount: user.chipsAmount + INITIAL_CHIPS_AMOUNT }
+      );
+      return res.status(200).json(updatedUser);
     } else {
       return res.status(400).json({ errors: [{ msg: 'Invalid request' }] });
     }

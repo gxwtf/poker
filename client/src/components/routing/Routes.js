@@ -24,7 +24,7 @@ const Routes = () => {
             key={page.slug}
             path={`/${page.slug}`}
             component={() => (
-              <StaticPage title={page.title} content={page.content} />
+              <StaticPage title={page.title} contentKey={page.contentKey} content={page.content} />
             )}
           />
         ))}

@@ -8,10 +8,12 @@ import useScrollToTopOnPageLoad from '../hooks/useScrollToTopOnPageLoad';
 import { useTranslation } from 'react-i18next';
 import locaContext from '../context/localization/locaContext';
 
-const StaticPage = ({ title, content }) => {
+const StaticPage = ({ title, contentKey, content }) => {
   const { t } = useTranslation();
   const { lang } = useContext(locaContext);
   useScrollToTopOnPageLoad();
+
+  const pageContent = contentKey ? t(contentKey) : content;
 
   return (
     <>
@@ -22,7 +24,7 @@ const StaticPage = ({ title, content }) => {
         fullHeight
       >
         <HeadingWithLogo textCentered>{typeof title === 'object' ? title[lang] || title.en : title}</HeadingWithLogo>
-        <Markdown>{content}</Markdown>
+        <Markdown>{pageContent}</Markdown>
       </Container>
       <Container
         display="flex"

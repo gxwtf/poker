@@ -1,4 +1,3 @@
-// 静态页面数据，替代从 Contentful 获取的数据
 const staticPages = [
   {
     slug: 'imprint',

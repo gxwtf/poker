@@ -17,7 +17,7 @@ You can find the live version of this project [here](https://poker.gxwtf.cn/).
   - State Management is handled with the **Context-API** (built into React core-library)
   - **Styled Components** were used to create all of the custom CSS
 - Communication with the Backend is handled with **Axios** (REST-API) & **Socket.io** (Game logic)
-- All localized strings and static page content (e.g. privacy policy) is stored in **Contentful** (cloud-based Headless-CMS) and retrieved via their Content Delivery API
+- All localized strings and static page content (e.g. privacy policy) is stored in **React-i18next**
 
 ### Backend:
 
@@ -72,17 +72,9 @@ Set-up either a local PostgreSQL instance or create a [cloud-hosted instance](ht
   DATABASE_URL=postgresql://<YOUR_DB_USER>:<YOUR_DB_PASSWORD>@<YOUR_DB_HOST>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?schema=public
 ```
 
-### Set-up Contentful
-
-Create a free community [Contentful-Account](https://www.contentful.com/get-started/) and create a new Space. Add two locales (en, de) with "en" being the fallback for the german-locale. Create a Content Delivery API Key and copy your space token and Contentful Delivery API access-token to the clipboard, as you will need it for the next step.
-
-You can use the [Contentful CLI](https://www.npmjs.com/package/contentful-cli) to import the space backup from the "contentful"-folder into your own Contentful space. This backup includes all localized key-value pairs and the content of the static pages.
-
 ### Add a ".env.local" file in the "/client" folder with the following entries
 
 ```
-  REACT_APP_CONTENTFUL_SPACE_ID=<YOUR_CONTENTFUL_SPACE_ID>
-  REACT_APP_CONTENTFUL_ACCESS_TOKEN=<YOUR_CONTENTFUL_ACCESS_TOKEN>
   REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID=<YOUR_GOOGLE_ANALYTICS_TRACKING_ID>
   REACT_APP_SERVER_URI=<YOUR_BACKEND_URI_HOST_PORT>
 ```
